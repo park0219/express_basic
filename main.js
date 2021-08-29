@@ -1,17 +1,28 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+var fs = require("fs");
+var template = require("./lib/template.js");
+
 
 //route, routing
-app.get('/', (req, res) => res.send('/'));
+app.get("/", (request, response) => {
+    fs.readdir("./data", function (error, filelist) {
+        var title = "Welcome";
+        var description = "Hello, Node.js";
+        var list = template.list(filelist);
+        var html = template.HTML(title, list, `<h2>${title}</h2>${description}`, `<a href="/create">create</a>`);
+        response.send(html);
+    });
+});
 /* 위 코드와 동일함
 app.get('/', function(req, res) {
    return  res.send('Hello World!');
 });
 */
 
-app.get('/page', (req, res) => res.send('/page'));
+app.get("/page", (req, res) => res.send("/page"));
 
-app.listen(3000, () => console.log('Example app listening on port 3000'));
+app.listen(3000, () => console.log("Example app listening on port 3000"));
 
 /* var http = require("http");
 var fs = require("fs");
