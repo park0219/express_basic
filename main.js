@@ -48,7 +48,7 @@ app.get("/page/:pageID", (request, response) => {
     });
 });
 
-app.get('/create', (request, response) => {
+app.get("/create", (request, response) => {
     fs.readdir("./data", function (error, filelist) {
         var title = "WEB - create";
         var list = template.list(filelist);
@@ -72,7 +72,7 @@ app.get('/create', (request, response) => {
     });
 });
 
-app.post('/create_process', (request, response) => {
+app.post("/create_process", (request, response) => {
     var body = "";
     request.on("data", function (data) {
         body = body + data;
